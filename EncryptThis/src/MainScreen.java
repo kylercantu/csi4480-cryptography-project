@@ -1,9 +1,7 @@
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.BorderLayout;
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -19,7 +17,6 @@ public class MainScreen extends JFrame {
 
 	private JPanel keyLbl;
 	private JTextField keyTF;
-
 
 
 	/**
@@ -70,15 +67,15 @@ public class MainScreen extends JFrame {
 		lblNewLabel_1.setBounds(211, 90, 51, 28);
 		keyLbl.add(lblNewLabel_1);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBackground(Color.WHITE);
-		textArea.setBounds(21, 172, 410, 369);
-		keyLbl.add(textArea);
+		JTextArea plainTextArea = new JTextArea();
+		plainTextArea.setBackground(Color.WHITE);
+		plainTextArea.setBounds(21, 172, 424, 369);
+		keyLbl.add(plainTextArea);
 		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBackground(Color.WHITE);
-		textArea_1.setBounds(485, 172, 410, 369);
-		keyLbl.add(textArea_1);
+		JTextArea cipherTextArea = new JTextArea();
+		cipherTextArea.setBackground(Color.WHITE);
+		cipherTextArea.setBounds(471, 172, 424, 369);
+		keyLbl.add(cipherTextArea);
 		
 		JLabel plainTextLbl = new JLabel("Plain Text");
 		plainTextLbl.setFont(new Font("Tahoma", Font.BOLD, 12));
