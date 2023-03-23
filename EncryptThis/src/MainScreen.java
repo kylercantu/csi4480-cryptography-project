@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 
 public class MainScreen extends JFrame {
 
-	private JPanel keyLbl;
+	private JPanel mainPanel;
 	private JTextField keyTF;
 
 
@@ -23,77 +23,81 @@ public class MainScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public MainScreen() {
+		
+		//JFrame Settings
 		setTitle("Encrypt-This");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 932, 683);
 		setLocationRelativeTo(null);
 		
-		keyLbl = new JPanel();
-		keyLbl.setBackground(Color.LIGHT_GRAY);
-		keyLbl.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//JPanel Settings
+		mainPanel = new JPanel();
+		mainPanel.setBackground(Color.LIGHT_GRAY);
+		mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(keyLbl);
-		keyLbl.setLayout(null);
+		setContentPane(mainPanel);
+		mainPanel.setLayout(null);
 		
 		JRadioButton aesRadio = new JRadioButton("AES");
 		aesRadio.setHorizontalAlignment(SwingConstants.CENTER);
 		aesRadio.setBackground(Color.LIGHT_GRAY);
 		aesRadio.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		aesRadio.setBounds(272, 39, 109, 23);
-		keyLbl.add(aesRadio);
+		mainPanel.add(aesRadio);
 		
 		JRadioButton rsaRadio = new JRadioButton("RSA");
 		rsaRadio.setHorizontalAlignment(SwingConstants.CENTER);
 		rsaRadio.setBackground(Color.LIGHT_GRAY);
 		rsaRadio.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		rsaRadio.setBounds(383, 39, 109, 23);
-		keyLbl.add(rsaRadio);
+		mainPanel.add(rsaRadio);
 		
 		JLabel chooseAlgLbl = new JLabel("Choose an Algorithm:");
 		chooseAlgLbl.setHorizontalAlignment(SwingConstants.RIGHT);
 		chooseAlgLbl.setFont(new Font("Tahoma", Font.BOLD, 15));
 		chooseAlgLbl.setBounds(88, 39, 174, 23);
-		keyLbl.add(chooseAlgLbl);
+		mainPanel.add(chooseAlgLbl);
 		
 		keyTF = new JTextField();
 		keyTF.setBounds(272, 91, 381, 31);
-		keyLbl.add(keyTF);
+		mainPanel.add(keyTF);
 		keyTF.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Key:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1.setBounds(211, 90, 51, 28);
-		keyLbl.add(lblNewLabel_1);
+		JLabel keyLbl = new JLabel("Key:");
+		keyLbl.setFont(new Font("Tahoma", Font.BOLD, 15));
+		keyLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		keyLbl.setBounds(211, 90, 51, 28);
+		mainPanel.add(keyLbl);
 		
 		JTextArea plainTextArea = new JTextArea();
 		plainTextArea.setBackground(Color.WHITE);
 		plainTextArea.setBounds(21, 172, 424, 369);
-		keyLbl.add(plainTextArea);
+		mainPanel.add(plainTextArea);
 		
 		JTextArea cipherTextArea = new JTextArea();
 		cipherTextArea.setBackground(Color.WHITE);
 		cipherTextArea.setBounds(471, 172, 424, 369);
-		keyLbl.add(cipherTextArea);
+		mainPanel.add(cipherTextArea);
 		
 		JLabel plainTextLbl = new JLabel("Plain Text");
 		plainTextLbl.setFont(new Font("Tahoma", Font.BOLD, 12));
 		plainTextLbl.setBounds(44, 147, 103, 14);
-		keyLbl.add(plainTextLbl);
+		mainPanel.add(plainTextLbl);
 		
 		JLabel cipherTextLbl = new JLabel("Cipher Text");
 		cipherTextLbl.setFont(new Font("Tahoma", Font.BOLD, 12));
 		cipherTextLbl.setBounds(505, 148, 103, 14);
-		keyLbl.add(cipherTextLbl);
+		mainPanel.add(cipherTextLbl);
 		
 		JButton encryptBtn = new JButton("Encrypt");
 		encryptBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		encryptBtn.setBounds(154, 569, 130, 41);
-		keyLbl.add(encryptBtn);
+		mainPanel.add(encryptBtn);
 		
 		JButton btnDecrypt = new JButton("Decrypt");
 		btnDecrypt.addActionListener(new ActionListener() {
@@ -101,7 +105,7 @@ public class MainScreen extends JFrame {
 			}
 		});
 		btnDecrypt.setBounds(633, 569, 130, 41);
-		keyLbl.add(btnDecrypt);
+		mainPanel.add(btnDecrypt);
 		setVisible(true);
-	}
-}
+	}//End constructor
+}//End MainScreen Class

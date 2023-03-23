@@ -67,10 +67,9 @@ public class StartUpScreen extends JFrame {
 				if(e.getSource() == proceedBtn)
 				dispose();
 				MainScreen ms = new MainScreen();
-				
 			}
 		});
 		proceedBtn.setBounds(175, 339, 126, 46);
 		contentPane.add(proceedBtn);
-	}
-}
+	}//End constructor
+}//End StartUpScreen class
