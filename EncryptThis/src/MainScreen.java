@@ -9,6 +9,7 @@ import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -23,7 +24,6 @@ public class MainScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public MainScreen() {
-		
 		//JFrame Settings
 		setTitle("Encrypt-This");
 		setResizable(false);
@@ -35,7 +35,7 @@ public class MainScreen extends JFrame {
 		mainPanel = new JPanel();
 		mainPanel.setBackground(Color.LIGHT_GRAY);
 		mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		
 		setContentPane(mainPanel);
 		mainPanel.setLayout(null);
 		
@@ -52,6 +52,10 @@ public class MainScreen extends JFrame {
 		rsaRadio.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		rsaRadio.setBounds(383, 39, 109, 23);
 		mainPanel.add(rsaRadio);
+		
+		ButtonGroup buttonGroup = new ButtonGroup();
+		buttonGroup.add(aesRadio);
+		buttonGroup.add(rsaRadio);
 		
 		JLabel chooseAlgLbl = new JLabel("Choose an Algorithm:");
 		chooseAlgLbl.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -70,25 +74,26 @@ public class MainScreen extends JFrame {
 		keyLbl.setBounds(211, 90, 51, 28);
 		mainPanel.add(keyLbl);
 		
-		JTextArea plainTextArea = new JTextArea();
-		plainTextArea.setBackground(Color.WHITE);
-		plainTextArea.setBounds(21, 172, 424, 369);
-		mainPanel.add(plainTextArea);
+		JTextArea inputTextArea = new JTextArea();
+		inputTextArea.setBackground(Color.WHITE);
+		inputTextArea.setBounds(21, 172, 424, 369);
+		mainPanel.add(inputTextArea);
 		
-		JTextArea cipherTextArea = new JTextArea();
-		cipherTextArea.setBackground(Color.WHITE);
-		cipherTextArea.setBounds(471, 172, 424, 369);
-		mainPanel.add(cipherTextArea);
+		JTextArea outputTextArea = new JTextArea();
+		outputTextArea.setEditable(false);
+		outputTextArea.setBackground(Color.WHITE);
+		outputTextArea.setBounds(471, 172, 424, 369);
+		mainPanel.add(outputTextArea);
 		
-		JLabel plainTextLbl = new JLabel("Plain Text");
-		plainTextLbl.setFont(new Font("Tahoma", Font.BOLD, 12));
-		plainTextLbl.setBounds(44, 147, 103, 14);
-		mainPanel.add(plainTextLbl);
+		JLabel inputLbl = new JLabel("Input:");
+		inputLbl.setFont(new Font("Tahoma", Font.BOLD, 12));
+		inputLbl.setBounds(44, 147, 103, 14);
+		mainPanel.add(inputLbl);
 		
-		JLabel cipherTextLbl = new JLabel("Cipher Text");
-		cipherTextLbl.setFont(new Font("Tahoma", Font.BOLD, 12));
-		cipherTextLbl.setBounds(505, 148, 103, 14);
-		mainPanel.add(cipherTextLbl);
+		JLabel outputLbl = new JLabel("Output:");
+		outputLbl.setFont(new Font("Tahoma", Font.BOLD, 12));
+		outputLbl.setBounds(505, 148, 103, 14);
+		mainPanel.add(outputLbl);
 		
 		JButton encryptBtn = new JButton("Encrypt");
 		encryptBtn.addActionListener(new ActionListener() {
@@ -96,7 +101,7 @@ public class MainScreen extends JFrame {
 				
 			}
 		});
-		encryptBtn.setBounds(154, 569, 130, 41);
+		encryptBtn.setBounds(315, 569, 130, 41);
 		mainPanel.add(encryptBtn);
 		
 		JButton btnDecrypt = new JButton("Decrypt");
@@ -104,8 +109,9 @@ public class MainScreen extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnDecrypt.setBounds(633, 569, 130, 41);
+		btnDecrypt.setBounds(471, 569, 130, 41);
 		mainPanel.add(btnDecrypt);
+		
 		setVisible(true);
 	}//End constructor
 }//End MainScreen Class

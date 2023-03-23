@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 
+
 public class StartUpScreen extends JFrame {
 
 	private JPanel contentPane;
