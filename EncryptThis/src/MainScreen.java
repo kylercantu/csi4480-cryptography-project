@@ -27,8 +27,9 @@ public class MainScreen extends JFrame {
 	private JPanel mainPanel;
 	private JTextField keyTF;
 	private AlgorithmRSA rsa = new AlgorithmRSA();
+	private static AlgorithmAES aes = new AlgorithmAES();
 	private JTextField chooseFileTF;
-
+	private String inputKeytext;
 
 	/**
 	 * Create the frame.
@@ -87,6 +88,10 @@ public class MainScreen extends JFrame {
 				if(rsaRadio.isSelected()) {
 					rsa.generateKeys();
 					JOptionPane.showMessageDialog(null, "Key(s) Generated and Saved to Desktop");
+				}
+				if (aesRadio.isSelected()) {
+					inputKeytext = JOptionPane.showInputDialog(generateKeyBtn, "Choose your key");
+					aes.setKey(inputKeytext);
 				}
 			}
 		});
@@ -162,6 +167,12 @@ public class MainScreen extends JFrame {
 					}
 					
 				}
+				if(aesRadio.isSelected()) {
+					
+					String encMsg = aes.encrypt(inputTextArea.getText(), inputKeytext);
+					outputTextArea.setText(encMsg); 
+					
+				}
 				
 			}
 		});
@@ -181,6 +192,11 @@ public class MainScreen extends JFrame {
 						e1.printStackTrace();
 					}
 				}
+				if(aesRadio.isSelected()) {
+					String decMsg = aes.decrypt(inputTextArea.getText(), keyTF.getText());
+					outputTextArea.setText(decMsg);
+				}
+				
 			}
 		});
 		btnDecrypt.setBounds(471, 569, 130, 41);
