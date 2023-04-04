@@ -1,8 +1,6 @@
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.KeyFactory;
-import java.security.KeyGenerator;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Base64;
@@ -44,6 +42,7 @@ public class AlgorithmAES {
         }
         return null;
     }
+    
     //decrypt
     public String decrypt(String strToDec, String sec) {
         try {
@@ -57,37 +56,6 @@ public class AlgorithmAES {
         return null;
     }
 
-    public void publicKeyToFile(String key){
-		try {
-			String userDesktop = System.getProperty("user.home") + "/Desktop";
-			File file = new File(userDesktop, "publickey.txt");
-		
-			if(!file.exists()) {
-				file.createNewFile();
-			}
-			
-			PrintWriter pw = new PrintWriter(file);
-			String encodeKey = Base64.getEncoder().encodeToString(key.getEncoded());
-			pw.print(encodeKey);
-			pw.close();
-			
-		}catch(IOException e) {
-			System.out.println("Error with File");
-		}
-	}//End publicKeyToFile
-    public static void main(String[] args) throws Exception {
-        final String secretKey = "KeepONMovingBuddy";
-        String originalString = "Secret Site: - http://10.67.84.101/";
 
-        //Enc
-        String encSite = encrypt(originalString, secretKey);
-        
-        //Dec
-        String decSite = decrypt(encSite, secretKey);
-        //DisplayAll
-        System.out.println("Original: " + originalString);
-        System.out.println("Encrypted text: " + encSite);
-        System.out.println("Decrypted text: " + decSite);
-
-    }
+   
 }

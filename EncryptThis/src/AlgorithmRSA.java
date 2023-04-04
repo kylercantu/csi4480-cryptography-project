@@ -64,8 +64,8 @@ public class AlgorithmRSA {
 	}//End encryptMsg
 	
 	public String decryptMsg(JTextArea textArea) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException{
-		byte[] decodeMsg = Base64.getDecoder().decode(textArea.getText().getBytes());
 		byte[] msgToByte = textArea.getText().getBytes();
+		byte[] decodeMsg = Base64.getDecoder().decode(msgToByte);
 		Cipher decryptCipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
 		decryptCipher.init(Cipher.DECRYPT_MODE, privateKey);
 		byte[] decryptedBytes = decryptCipher.doFinal(decodeMsg);
@@ -78,7 +78,7 @@ public class AlgorithmRSA {
 	public void publicKeyToFile(PublicKey key){
 		try {
 			String userDesktop = System.getProperty("user.home") + "/Desktop";
-			File file = new File(userDesktop, "publickey.txt");
+			File file = new File(userDesktop, "RSApublickey.txt");
 		
 			if(!file.exists()) {
 				file.createNewFile();
@@ -98,12 +98,11 @@ public class AlgorithmRSA {
 	public void privateKeyToFile(PrivateKey key) {
 		try {
 			String userDesktop = System.getProperty("user.home") + "/Desktop";
-			File file = new File(userDesktop, "privatekey.txt");
+			File file = new File(userDesktop, "RSAprivatekey.txt");
 		
 			if(!file.exists()) {
 				file.createNewFile();
 			}
-			
 			PrintWriter pw = new PrintWriter(file);
 			String encodeKey = Base64.getEncoder().encodeToString(key.getEncoded());
 			pw.print(encodeKey);
