@@ -21,6 +21,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
 
 public class MainScreen extends JFrame {
 
@@ -202,7 +205,19 @@ public class MainScreen extends JFrame {
 		btnDecrypt.setBounds(471, 569, 130, 41);
 		mainPanel.add(btnDecrypt);
 		
-
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("File");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Email");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new EmailSender(outputTextArea.getText()).setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
 		
 		setVisible(true);
 	}//End constructor
