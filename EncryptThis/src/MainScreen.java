@@ -3,12 +3,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileNotFoundException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-
+import java.util.Scanner;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -18,6 +17,9 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -25,9 +27,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JMenu;
 
 public class MainScreen extends JFrame {
 
@@ -76,6 +75,8 @@ public class MainScreen extends JFrame {
 		ButtonGroup buttonGroup = new ButtonGroup();
 		buttonGroup.add(aesRadio);
 		buttonGroup.add(rsaRadio);
+		aesRadio.setSelected(true);
+	
 		
 		JButton selectFileBtn = new JButton("Select File");
 		selectFileBtn.addActionListener(new ActionListener() {
@@ -226,10 +227,25 @@ public class MainScreen extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		setVisible(true);
+
 	}//End constructor
 	
 	
+	public String getFileContents() {
+		String filePath = System.getProperty("user.home") + "\\Desktop\\RSApublickey.txt";
+		
+		try {
+			 File file = new File(filePath);
+            Scanner scan = new Scanner(file);
+            String returnMe = scan.nextLine();
+            scan.close();
+            return returnMe;
 
-	
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return "No such file";
+		}
+		
+	}
 	
 }//End MainScreen Class
