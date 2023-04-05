@@ -45,7 +45,6 @@ public class EmailSender extends JFrame {
 	public EmailSender(final String outputBox) {
 		setTitle("Send Email");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 501, 439);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -105,8 +104,7 @@ public class EmailSender extends JFrame {
 			lblPreview.setText(outputBox);
 		}
 		contentPane.add(lblPreview);
-		
-		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 	}
 	

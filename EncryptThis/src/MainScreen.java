@@ -3,6 +3,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -12,6 +15,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -33,6 +37,7 @@ public class MainScreen extends JFrame {
 	private static AlgorithmAES aes = new AlgorithmAES();
 	private JTextField chooseFileTF;
 	private String inputKeytext;
+	JFileChooser fc = new JFileChooser();
 
 	/**
 	 * Create the frame.
@@ -90,7 +95,7 @@ public class MainScreen extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(rsaRadio.isSelected()) {
 					rsa.generateKeys();
-					JOptionPane.showMessageDialog(null, "Key(s) Generated and Saved to Desktop");
+					JOptionPane.showMessageDialog(null, "Key(s) Generated and Saved to Desktop.");
 				}
 				if (aesRadio.isSelected()) {
 					inputKeytext = JOptionPane.showInputDialog(generateKeyBtn, "Choose your key");
@@ -168,6 +173,7 @@ public class MainScreen extends JFrame {
 						
 						e1.printStackTrace();
 					}
+
 					
 				}
 				if(aesRadio.isSelected()) {
@@ -222,6 +228,8 @@ public class MainScreen extends JFrame {
 		setVisible(true);
 	}//End constructor
 	
+	
+
 	
 	
 }//End MainScreen Class
