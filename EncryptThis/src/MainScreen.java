@@ -155,16 +155,19 @@ public class MainScreen extends JFrame {
 		encryptBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(rsaRadio.isSelected()) {
-					try {
-						String encMsg = rsa.encryptMsg(inputTextArea);
-						outputTextArea.setText(encMsg);
-					} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException
-							| IllegalBlockSizeException | BadPaddingException e1) {
-						
-						e1.printStackTrace();
-					}
-
-					
+					String publicKey = getFileContents();
+					if(keyTF.getText().equals(publicKey)) {
+						try {
+							String encMsg = rsa.encryptMsg(inputTextArea);
+							outputTextArea.setText(encMsg);
+						} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException
+								| IllegalBlockSizeException | BadPaddingException e1) {
+							
+							e1.printStackTrace();
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Invalid Key");
+					}	
 				}
 				if(aesRadio.isSelected()) {
 					
