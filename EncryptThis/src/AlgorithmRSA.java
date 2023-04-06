@@ -57,26 +57,15 @@ public class AlgorithmRSA {
 			publicKey = keyPair.getPublic();
 			privateKey = keyPair.getPrivate();
 			
+			System.out.println("Public Key before Base64:\n" + publicKey + "\n");
+			System.out.println("Private Key before Base64:\n" + privateKey);
+			
 			publicKeyToFile(publicKey);
 			privateKeyToFile(privateKey);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 	}//End generateKeys
-	
-//	public void initKeys() {
-//		KeyPairGenerator keyGen;
-//		try {
-//			keyGen = KeyPairGenerator.getInstance("RSA");
-//			keyGen.initialize(2048); 
-//			KeyPair keyPair = keyGen.generateKeyPair();
-//			publicKey = keyPair.getPublic();
-//			privateKey = keyPair.getPrivate();
-//		} catch (NoSuchAlgorithmException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} 
-//	}//End initKeys
 	
 	public String encryptMsg(JTextArea textArea) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		byte[] msgToByte = textArea.getText().getBytes(); //gets the bytes from the JTextArea and stores into Array
