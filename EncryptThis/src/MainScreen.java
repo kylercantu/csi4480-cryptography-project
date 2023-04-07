@@ -156,7 +156,7 @@ public class MainScreen extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(rsaRadio.isSelected()) {
 					String publicKey = getFileContents();
-					if(keyTF.getText().equals(publicKey)) {
+					if(keyTF.getText().equals(publicKey) || keyTF.getText().length() == 392) {
 						try {
 							String encMsg = rsa.encryptMsg(inputTextArea);
 							outputTextArea.setText(encMsg);
