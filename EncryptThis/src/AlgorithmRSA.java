@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
-import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.Signature;
 import java.util.Base64;
 
 import javax.crypto.BadPaddingException;
@@ -57,8 +57,8 @@ public class AlgorithmRSA {
 			publicKey = keyPair.getPublic();
 			privateKey = keyPair.getPrivate();
 			
-			System.out.println("Public Key before Base64:\n" + publicKey + "\n");
-			System.out.println("Private Key before Base64:\n" + privateKey);
+			System.out.println(publicKey);
+			System.out.println(privateKey);
 			
 			publicKeyToFile(publicKey);
 			privateKeyToFile(privateKey);
@@ -86,7 +86,6 @@ public class AlgorithmRSA {
 		String decryptedMsg = new String(decryptedBytes, StandardCharsets.UTF_8);
 		return decryptedMsg;
 	}//End decryptMsg
-	
 	
 	
 	public void publicKeyToFile(PublicKey key){
