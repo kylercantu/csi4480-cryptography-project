@@ -69,7 +69,7 @@ public class AlgorithmRSA {
 	
 	public String encryptMsg(JTextArea textArea) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		byte[] msgToByte = textArea.getText().getBytes(); //gets the bytes from the JTextArea and stores into Array
-		Cipher encryptCipher = Cipher.getInstance("RSA/ECB/PKCS1Padding"); //The method used to "hide" the words/text
+		Cipher encryptCipher = Cipher.getInstance("RSA"); //The method used to "hide" the words/text
 		encryptCipher.init(Cipher.ENCRYPT_MODE, publicKey); //Initializes the cipher using the public key
 		byte[] encryptedBytes = encryptCipher.doFinal(msgToByte); //Encrypts the message that we converted to bytes
 		String encodedMsg = Base64.getEncoder().encodeToString(encryptedBytes); //Converts the message to Base 64 alphabets which are ASCII characters
@@ -80,7 +80,7 @@ public class AlgorithmRSA {
 	public String decryptMsg(JTextArea textArea) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException{
 		byte[] msgToByte = textArea.getText().getBytes();
 		byte[] decodeMsg = Base64.getDecoder().decode(msgToByte);
-		Cipher decryptCipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		Cipher decryptCipher = Cipher.getInstance("RSA");
 		decryptCipher.init(Cipher.DECRYPT_MODE, privateKey);
 		byte[] decryptedBytes = decryptCipher.doFinal(decodeMsg);
 		String decryptedMsg = new String(decryptedBytes, StandardCharsets.UTF_8);
