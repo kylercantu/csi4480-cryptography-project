@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -37,6 +38,7 @@ public class MainScreen extends JFrame {
 	private static AlgorithmAES aes = new AlgorithmAES();
 	private String inputKeytext;
 	JFileChooser fc = new JFileChooser();
+	String rsaPublicKey;
 
 	/**
 	 * Create the frame.
@@ -222,16 +224,34 @@ public class MainScreen extends JFrame {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Email");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new EmailSender(outputTextArea.getText()).setVisible(true);
+				if (rsaRadio.isSelected()) {
+					String publicKey = getFileContents();
+					new EmailSender(outputTextArea.getText(), publicKey).setVisible(true);
+				} else {
+					new EmailSender(outputTextArea.getText(), "No such file").setVisible(true); 
+				}
+
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);
+
+		JMenuItem mntmHelpItem = new JMenuItem("Help");
+		mntmHelpItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (rsaRadio.isSelected()) {
+					new HelpScreen("RSA").setVisible(true);
+				} else if (aesRadio.isSelected()){
+					new HelpScreen("AES").setVisible(true); 
+				}
+			}
+		});
+		mnNewMenu.add(mntmHelpItem);
 		
 		setVisible(true);
 
 	}//End constructor
 	
-	
+
 	public String getFileContents() {
 		String filePath = System.getProperty("user.home") + "\\Desktop\\RSApublickey.txt";
 		
