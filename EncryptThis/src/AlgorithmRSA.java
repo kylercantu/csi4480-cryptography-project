@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
-import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.Signature;
 import java.util.Base64;
 
 import javax.crypto.BadPaddingException;
@@ -57,6 +57,9 @@ public class AlgorithmRSA {
 			publicKey = keyPair.getPublic();
 			privateKey = keyPair.getPrivate();
 			
+			System.out.println(publicKey);
+			System.out.println(privateKey);
+			
 			publicKeyToFile(publicKey);
 			privateKeyToFile(privateKey);
 		} catch (NoSuchAlgorithmException e) {
@@ -64,23 +67,9 @@ public class AlgorithmRSA {
 		}
 	}//End generateKeys
 	
-//	public void initKeys() {
-//		KeyPairGenerator keyGen;
-//		try {
-//			keyGen = KeyPairGenerator.getInstance("RSA");
-//			keyGen.initialize(2048); 
-//			KeyPair keyPair = keyGen.generateKeyPair();
-//			publicKey = keyPair.getPublic();
-//			privateKey = keyPair.getPrivate();
-//		} catch (NoSuchAlgorithmException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} 
-//	}//End initKeys
-	
 	public String encryptMsg(JTextArea textArea) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		byte[] msgToByte = textArea.getText().getBytes(); //gets the bytes from the JTextArea and stores into Array
-		Cipher encryptCipher = Cipher.getInstance("RSA/ECB/PKCS1Padding"); //The method used to "hide" the words/text
+		Cipher encryptCipher = Cipher.getInstance("RSA"); //The method used to "hide" the words/text
 		encryptCipher.init(Cipher.ENCRYPT_MODE, publicKey); //Initializes the cipher using the public key
 		byte[] encryptedBytes = encryptCipher.doFinal(msgToByte); //Encrypts the message that we converted to bytes
 		String encodedMsg = Base64.getEncoder().encodeToString(encryptedBytes); //Converts the message to Base 64 alphabets which are ASCII characters
@@ -91,13 +80,12 @@ public class AlgorithmRSA {
 	public String decryptMsg(JTextArea textArea) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException{
 		byte[] msgToByte = textArea.getText().getBytes();
 		byte[] decodeMsg = Base64.getDecoder().decode(msgToByte);
-		Cipher decryptCipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		Cipher decryptCipher = Cipher.getInstance("RSA");
 		decryptCipher.init(Cipher.DECRYPT_MODE, privateKey);
 		byte[] decryptedBytes = decryptCipher.doFinal(decodeMsg);
 		String decryptedMsg = new String(decryptedBytes, StandardCharsets.UTF_8);
 		return decryptedMsg;
 	}//End decryptMsg
-	
 	
 	
 	public void publicKeyToFile(PublicKey key){
@@ -157,6 +145,7 @@ public class AlgorithmRSA {
 			return null;
 		}
 	}//End getKeyFromFile
+	
 	
 
 	
